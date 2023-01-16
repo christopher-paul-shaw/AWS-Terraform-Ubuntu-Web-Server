@@ -1,9 +1,11 @@
+# Providers
 provider "aws" {
     region = "eu-west-2"
     access_key = var.aws_access_key
     secret_key = var.aws_secret_key
 }
 
+# Variables
 variable "aws_access_key" {
     description = "AWS Access Key"
 }
@@ -12,9 +14,7 @@ variable "aws_secret_key" {
     description = "AWS Secret Key"
 }
 
-
 # Networking
-
 resource "aws_internet_gateway" "Main_Gateway" {
     vpc_id = aws_vpc.Main_VPC.id
 }
@@ -107,7 +107,6 @@ resource "aws_security_group" "allow_web" {
     }
 }
 
-
 resource "aws_instance" "API_Instance" {
     ami = "ami-01b8d743224353ffe"
     availability_zone = "eu-west-2a"
@@ -125,7 +124,5 @@ resource "aws_instance" "API_Instance" {
                 sudo apt update -y
                 sudo apt install apache2 -y
                 sudo systemclt start apache2
-                sudo bash -c 'echo "Installed" > /var/www/html/index.html'
                 EOF
-
 }
